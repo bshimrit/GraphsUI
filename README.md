@@ -1,2 +1,0 @@
-# GraphsUI
-Created with CodeSandbox
