@@ -1,7 +1,8 @@
 {
-  "name": "new",
+  "name": "graph-traversing-in-react",
   "version": "1.0.0",
-  "description": "",
+  "description":
+    "Traverse a graph using BFS/DFS algorithms.  Using react-graph-vis.",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

@@ -7,8 +7,10 @@ import GraphService from "./GraphService";
 class GraphComp extends Component {
   constructor() {
     super();
+    this.interval;
     this.state = {
       graph: GraphService.convertGraphToProp(),
+      origGraph: GraphService.convertGraphToProp(),
       options: {
         layout: { improvedLayout: true },
         edges: {
@@ -19,24 +21,30 @@ class GraphComp extends Component {
         select: function(event) {
           var { nodes, edges } = event;
         }
-      }
+      },
+      selectedNode: 1
     };
   }
 
   startTraverse = algo => {
-    var nodeSteps = GraphService.traverse(algo);
-    nodeSteps.forEach((node, idx) => {
-      updateSelected(this, node, idx);
-    });
-
-    function updateSelected(cmp, node, idx) {
-      setTimeout(function() {
-        var curGraph = JSON.parse(JSON.stringify(cmp.state.graph));
-        curGraph.nodes[node - 1].color.background = "red";
-        cmp.setState({ graph: curGraph });
-      }, 1000 * idx);
-    }
+    var origGraph = JSON.parse(JSON.stringify(this.state.origGraph));
+    this.setState({ graph: origGraph });
+    var nodeSteps = GraphService.traverse(algo, this.state.selectedNode);
+    this.updateSelectedNodes(this, nodeSteps, 1000);
   };
+
+  updateSelectedNodes(cmp, array, delay) {
+    var i = 0;
+    clearInterval(cmp.interval);
+    cmp.interval = setInterval(function() {
+      var node = array[i];
+      var curGraph = JSON.parse(JSON.stringify(cmp.state.graph));
+      curGraph.nodes[node - 1].color.background = "red";
+      cmp.setState({ graph: curGraph });
+
+      if (i++ >= array.length - 1) clearInterval(cmp.interval);
+    }, delay);
+  }
 
   render() {
     return (

@@ -37,14 +37,14 @@ function convertGraphToProp() {
   return { nodes, edges };
 }
 
-function traverse(logic) {
+function traverse(logic, selectedNode) {
   traverseSteps = [];
   switch (logic) {
     case "bfs":
-      bfs(graph, 4);
+      bfs(graph, selectedNode);
       break;
     case "dfs":
-      dfs(graph, 4);
+      dfs(graph, selectedNode);
       break;
     default:
       throw "Problem";
