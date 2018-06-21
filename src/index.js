@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Graph from "./GraphComp";
+import Main from "./Main";
 
 import "./styles.css";
 
 function App() {
   return (
     <div className="App">
-      <Graph />
+      <Main />
     </div>
   );
 }

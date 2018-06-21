@@ -1,19 +1,19 @@
 var graph = {
-  1: { relations: [2, 3, 4, 12, 11], visited: false },
-  2: { relations: [1, 3, 6], visited: false },
-  3: { relations: [1, 2, 4, 7, 13], visited: false },
-  4: { relations: [1, 3, 6, 10], visited: false },
-  5: { relations: [8, 6, 10], visited: false },
-  6: { relations: [4, 5, 13], visited: false },
-  7: { relations: [3, 8], visited: false },
-  8: { relations: [5, 7, 13], visited: false },
-  9: { relations: [14], visited: false },
-  10: { relations: [4, 5, 12], visited: false },
-  11: { relations: [12, 1], visited: false },
-  12: { relations: [10, 11, 15], visited: false },
-  13: { relations: [6, 3, 8, 15], visited: false },
-  14: { relations: [9, 15], visited: false },
-  15: { relations: [14, 13, 12], visited: false }
+  1: { relations: [2, 3, 4, 12, 11] },
+  2: { relations: [1, 3, 6] },
+  3: { relations: [1, 2, 4, 7, 13] },
+  4: { relations: [1, 3, 6, 10] },
+  5: { relations: [8, 6, 10] },
+  6: { relations: [4, 5, 13] },
+  7: { relations: [3, 8] },
+  8: { relations: [5, 7, 13] },
+  9: { relations: [] },
+  10: { relations: [4, 5, 12] },
+  11: { relations: [12, 1] },
+  12: { relations: [10, 11, 15] },
+  13: { relations: [6, 3, 8, 15] },
+  14: { relations: [15] },
+  15: { relations: [14, 13, 12] }
 };
 
 var traverseSteps = [];
@@ -74,17 +74,24 @@ function bfs(graph, source) {
 }
 
 function dfs(graph, source) {
-  traverseSteps.push(source);
-  var stack = graph[source].relations;
+  var traverseMap = {};
+  traverseMap[source] = true;
+  executeDfs(source);
 
-  while (stack.length) {
-    var vertex = stack.shift();
-    if (graph[vertex].visited) continue;
-    else graph[vertex].visited = true;
-    dfs(graph, vertex);
+  function executeDfs(source) {
+    var stack = graph[source].relations.slice();
+    traverseSteps.push(source);
+
+    while (stack.length) {
+      var vertex = stack.shift();
+      if (traverseMap[vertex]) continue;
+      else {
+        traverseMap[vertex] = true;
+        executeDfs(vertex);
+      }
+    }
   }
-
-  return graph;
+  return traverseMap;
 }
 
 export default {
