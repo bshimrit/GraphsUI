@@ -14,10 +14,14 @@ class Main extends Component {
       graph: GraphService.convertGraphToProp(),
       origGraph: GraphService.convertGraphToProp(),
       options: {
-        nodes: { font: { face: "Montserrat" } },
+        nodes: { font: { face: "Montserrat", size: 20 } },
         layout: { improvedLayout: true },
         edges: {
-          arrows: { to: { enabled: false }, from: { enabled: false } }
+          length: 200,
+          arrows: {
+            to: { enabled: false },
+            from: { enabled: false }
+          }
         }
       },
       events: {
@@ -56,13 +60,16 @@ class Main extends Component {
 
   render() {
     return (
-      <div className="Main">
-        <ControlPanel startTraverse={this.startTraverse} />
-        <Graph
-          graph={this.state.graph}
-          options={this.state.options}
-          events={this.state.events}
-        />
+      <div>
+        <h1>Choose a starting node and traversing algorithm</h1>
+        <div className="Main">
+          <ControlPanel startTraverse={this.startTraverse} />
+          <Graph
+            graph={this.state.graph}
+            options={this.state.options}
+            events={this.state.events}
+          />
+        </div>
       </div>
     );
   }
