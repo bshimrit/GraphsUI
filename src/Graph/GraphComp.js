@@ -5,7 +5,7 @@ import Graph from "react-graph-vis";
 class GraphComp extends Component {
   render() {
     return (
-      <div className="Graph">
+      <div className="graph">
         <Graph
           graph={this.props.graph}
           options={this.props.options}

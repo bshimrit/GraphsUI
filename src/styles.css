@@ -10,10 +10,18 @@
   font-family: "Fira Sans", sans-serif;
 }
 
-.Main .Graph {
+.main .graph-container .graph {
   height: 80vh;
 }
 
-.control-panel {
-  width: 30vw;
+.main .graph-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.graph {
+  width: 50%;
+} */
+/* .nodes-display {
+  width: 20%;
 }

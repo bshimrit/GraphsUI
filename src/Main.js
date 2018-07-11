@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 
-import Graph from "./GraphComp";
-import ControlPanel from "./ControlPanel";
+import Graph from "./Graph/GraphComp";
+import ControlPanel from "./ControlPanel/ControlPanel";
+import NodesDisplay from "./NodesDisplay/NodesDisplay";
 
-import GraphService from "./GraphService";
+import GraphService from "./Services/GraphService";
 
 class Main extends Component {
   constructor() {
     super();
     const updateSelected = this.updateSelectedNode.bind(this);
-    this.interval;
     this.state = {
       graph: GraphService.convertGraphToProp(),
       origGraph: GraphService.convertGraphToProp(),
@@ -27,20 +27,22 @@ class Main extends Component {
       events: {
         select: function(event) {
           updateSelected(event.nodes[0]);
-          var { nodes, edges } = event;
         }
       },
-      selectedNode: 1
+      selectedNode: 1,
+      curNodes: []
     };
+    this.algorithmsList = GraphService.getAlgorithmsList();
+    this.interval;
   }
 
   updateSelectedNode(node) {
-    this.state.selectedNode = node;
+    this.setState({ selectedNode: node });
   }
 
   startTraverse = algo => {
     var origGraph = JSON.parse(JSON.stringify(this.state.origGraph));
-    this.setState({ graph: origGraph });
+    this.setState({ graph: origGraph, curNodes: [] });
     var nodeSteps = GraphService.traverse(algo, this.state.selectedNode);
     this.updateNodes(nodeSteps, 1000);
   };
@@ -52,8 +54,9 @@ class Main extends Component {
       var node = array[i];
       var curGraph = JSON.parse(JSON.stringify(this.state.graph));
       curGraph.nodes[node - 1].color.background = "#4291b7";
-      this.setState({ graph: curGraph });
-
+      var newNodes = this.state.curNodes.slice();
+      newNodes.push(node);
+      this.setState({ graph: curGraph, curNodes: newNodes });
       if (i++ >= array.length - 1) clearInterval(this.interval);
     }, delay);
   };
@@ -62,13 +65,19 @@ class Main extends Component {
     return (
       <div>
         <h1>Choose a starting node and traversing algorithm</h1>
-        <div className="Main">
-          <ControlPanel startTraverse={this.startTraverse} />
-          <Graph
-            graph={this.state.graph}
-            options={this.state.options}
-            events={this.state.events}
+        <div className="main">
+          <ControlPanel
+            startAction={this.startTraverse}
+            controlList={this.algorithmsList}
           />
+          <div className="graph-container">
+            <Graph
+              graph={this.state.graph}
+              options={this.state.options}
+              events={this.state.events}
+            />
+            <NodesDisplay nodes={this.state.curNodes} reverse={false} />
+          </div>
         </div>
       </div>
     );

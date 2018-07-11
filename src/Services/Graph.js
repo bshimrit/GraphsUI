@@ -1,3 +1,12 @@
+const algorithmsList = {
+  bfs: `Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. 
+    It starts at the tree root (or some arbitrary node of a graph), 
+    and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level.`,
+  dfs: `Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. 
+     It starts at the tree root (or some arbitrary node of a graph) 
+    and explores as far as possible along each branch before backtracking.`
+};
+
 export default class Graph {
   constructor() {
     this.graph = {
@@ -35,6 +44,10 @@ export default class Graph {
 
   set setSource(newSource) {
     this.source = newSource;
+  }
+
+  static get getAlgorithmsList() {
+    return algorithmsList;
   }
 
   bfs() {
@@ -76,7 +89,6 @@ export default class Graph {
 
     traverseMap[this.source] = true;
     executeDfs(this.source);
-    console.log(this);
     return traverseSteps;
   }
 }

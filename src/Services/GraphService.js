@@ -36,7 +36,12 @@ function traverse(logic, selectedNode) {
   }
 }
 
+function getAlgorithmsList() {
+  return Graph.getAlgorithmsList;
+}
+
 export default {
   convertGraphToProp,
-  traverse
+  traverse,
+  getAlgorithmsList
 };

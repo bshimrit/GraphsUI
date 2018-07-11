@@ -1,0 +1,30 @@
+.control-panel {
+  width: 90vw;
+}
+
+.control-panel {
+  display: flex;
+  text-align: left;
+}
+
+.control-panel .radio-group {
+  margin-right: 20px;
+  width: 30%;
+  z-index: 500;
+}
+
+.control-panel .description {
+  width: 60%;
+  transform: translateY(0%);
+  transition: translateX();
+  transition-duration: 1s;
+}
+
+.control-panel .description-enter-done {
+  opacity: 0;
+  transform: translateX(50%);
+}
+.control-panel .description-exit-done {
+  opacity: 1;
+  transform: translateX(0%);
+}
