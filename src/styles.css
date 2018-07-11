@@ -10,10 +10,6 @@
   font-family: "Fira Sans", sans-serif;
 }
 
-.main .graph-container .graph {
-  height: 80vh;
-}
-
 .main .graph-container {
   display: flex;
   justify-content: space-between;
@@ -21,7 +17,9 @@
 
 .graph {
   width: 50%;
-} */
-/* .nodes-display {
-  width: 20%;
+  height: 80vh;
+}
+.nodes-display {
+  width: 40%;
+  height: 40vh;
 }

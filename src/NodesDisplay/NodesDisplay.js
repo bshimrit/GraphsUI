@@ -17,7 +17,6 @@ class NodesDisplay extends Component {
 
   renderNodes() {
     var curNodes = this.props.nodes.slice();
-    if (this.props.reverse) curNodes.reverse();
 
     return curNodes.map(node => {
       return <div key={node}>{node}</div>;

@@ -76,7 +76,7 @@ class Main extends Component {
               options={this.state.options}
               events={this.state.events}
             />
-            <NodesDisplay nodes={this.state.curNodes} reverse={false} />
+            <NodesDisplay nodes={this.state.curNodes} reverse={true} />
           </div>
         </div>
       </div>
