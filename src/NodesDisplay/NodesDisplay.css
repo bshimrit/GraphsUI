@@ -1,26 +1,42 @@
-.nodes-display {
+.nodes-container {
   padding: 50px;
+}
+
+.nodes-display {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
 }
 
 .nodes-display.reverse {
-  flex-direction: column-reverse;
+  flex-direction: row-reverse;
 }
 
 .nodes-display.not-reverse {
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .nodes-display div {
   box-sizing: border-box;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   margin: 5px;
   text-align: center;
+  line-height: 30px;
   border: 2px solid black;
   transform: translateY(0%);
+}
+
+.nodes-display.not-reverse div:first-child::before {
+  content: "↬";
+  position: absolute;
+  left: -25px;
+}
+
+.nodes-display.reverse div:first-child::before {
+  content: "↫";
+  position: absolute;
+  right: -25px;
 }
 
 .nodes-display.reverse div {

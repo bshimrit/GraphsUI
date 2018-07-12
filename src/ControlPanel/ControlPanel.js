@@ -50,9 +50,11 @@ class ControlPanel extends Component {
   }
 
   renderDescription() {
+    var algoValue = null;
     if (!this.state.valueChanged)
-      return this.props.controlList[this.state.curValue];
-    else return this.props.controlList[this.state.prevValue];
+      algoValue = this.props.controlList[this.state.curValue];
+    else algoValue = this.props.controlList[this.state.prevValue];
+    return algoValue ? algoValue.description : "";
   }
 
   executeAction = value => {

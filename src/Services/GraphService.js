@@ -18,7 +18,6 @@ function convertGraphToProp() {
       edges.push(edge);
     }
   }
-
   return { nodes, edges };
 }
 
@@ -27,10 +26,8 @@ function traverse(logic, selectedNode) {
   switch (logic) {
     case "bfs":
       return graphObj.bfs();
-      break;
     case "dfs":
       return graphObj.dfs();
-      break;
     default:
       return [];
   }
