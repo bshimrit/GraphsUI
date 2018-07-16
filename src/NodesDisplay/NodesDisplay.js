@@ -29,7 +29,7 @@ class NodesDisplay extends Component {
       var curStyle = { backgroundColor: node.color };
       return (
         <div key={node.id} style={curStyle}>
-          {node.id}
+          {node.name}
         </div>
       );
     });

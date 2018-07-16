@@ -27,34 +27,34 @@ const colors = {
 export default class Graph {
   constructor() {
     this.graph = {
-      1: { relations: [2, 3] },
-      2: { relations: [1, 4, 5] },
-      3: { relations: [1, 6, 7] },
-      4: { relations: [2, 8, 9] },
-      5: { relations: [2, 10] },
-      6: { relations: [3, 11] },
-      7: { relations: [3, 12] },
-      8: { relations: [4] },
-      9: { relations: [4] },
-      10: { relations: [5] },
-      11: { relations: [6] },
-      12: { relations: [7] }
-      // 1: { relations: [2, 3, 4, 12, 11] },
-      // 2: { relations: [1, 3, 6] },
-      // 3: { relations: [1, 2, 4, 7, 13] },
-      // 4: { relations: [1, 3, 6, 10] },
-      // 5: { relations: [8, 6, 10] },
-      // 6: { relations: [4, 5, 13] },
-      // 7: { relations: [3, 8] },
-      // 8: { relations: [5, 7, 13] },
-      // 9: { relations: [] },
-      // 10: { relations: [4, 5, 12] },
-      // 11: { relations: [12, 1] },
-      // 12: { relations: [10, 11, 15] },
-      // 13: { relations: [6, 3, 8, 15] },
-      // 14: { relations: [15] },
-      // 15: { relations: [14, 13, 12] }
+      1: { name: "A", relations: [2, 3] },
+      2: { name: "B", relations: [1, 4, 5] },
+      3: { name: "C", relations: [1, 6, 7] },
+      4: { name: "D", relations: [2, 8, 9] },
+      5: { name: "E", relations: [2, 10] },
+      6: { name: "F", relations: [3, 11] },
+      7: { name: "G", relations: [3, 12] },
+      8: { name: "H", relations: [4] },
+      9: { name: "I", relations: [4] },
+      10: { name: "J", relations: [5] },
+      11: { name: "K", relations: [6] },
+      12: { name: "L", relations: [7] }
     };
+    // 1: { relations: [2, 3, 4, 12, 11] },
+    // 2: { relations: [1, 3, 6] },
+    // 3: { relations: [1, 2, 4, 7, 13] },
+    // 4: { relations: [1, 3, 6, 10] },
+    // 5: { relations: [8, 6, 10] },
+    // 6: { relations: [4, 5, 13] },
+    // 7: { relations: [3, 8] },
+    // 8: { relations: [5, 7, 13] },
+    // 9: { relations: [] },
+    // 10: { relations: [4, 5, 12] },
+    // 11: { relations: [12, 1] },
+    // 12: { relations: [10, 11, 15] },
+    // 13: { relations: [6, 3, 8, 15] },
+    // 14: { relations: [15] },
+    // 15: { relations: [14, 13, 12] }
 
     this.source = 1;
   }
@@ -83,7 +83,12 @@ export default class Graph {
     var traverseSteps = [];
     var queue = [this.source];
     var distanceMap = { [this.source]: 0 };
-    traverseSteps.push({ id: this.source, level: 0, color: colors[0] });
+    traverseSteps.push({
+      id: this.source,
+      name: this.graph[this.source].name,
+      level: 0,
+      color: colors[0]
+    });
     while (queue.length) {
       var curVertex = queue.pop();
       var neighbours = this.graph[curVertex].relations;
@@ -94,6 +99,7 @@ export default class Graph {
           distanceMap[vertex] = distanceMap[curVertex] + 1;
           traverseSteps.push({
             id: vertex,
+            name: this.graph[vertex].name,
             level: distanceMap[vertex],
             color: colors[distanceMap[vertex]]
           });

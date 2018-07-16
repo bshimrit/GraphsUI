@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Graph from "./Graph/GraphComp";
 import ControlPanel from "./ControlPanel/ControlPanel";
 import NodesDisplay from "./NodesDisplay/NodesDisplay";
+import AddGraph from "./AddGraph/AddGraph";
+import Modal from "./Modal/Modal";
 
 import GraphService from "./Services/GraphService";
 
@@ -35,7 +37,8 @@ class Main extends Component {
       curNodes: [],
       reverse: false,
       algorithmsList: GraphService.getAlgorithmsList(),
-      interval: null
+      interval: null,
+      addGraph: false
     };
   }
 
@@ -67,11 +70,18 @@ class Main extends Component {
     this.setState({ interval: curInterval });
   };
 
+  toggleModal = () => {
+    this.setState({
+      addGraph: !this.state.addGraph
+    });
+  };
+
   render() {
     return (
       <div>
         <h1>Choose a starting node and traversing algorithm</h1>
         <div className="main">
+          <button onClick={this.toggleModal}>Update Graph</button>
           <ControlPanel
             startAction={this.startTraverse}
             controlList={this.state.algorithmsList}
@@ -88,6 +98,9 @@ class Main extends Component {
             />
           </div>
         </div>
+        <Modal show={this.state.addGraph} handleCancel={this.toggleModal}>
+          <AddGraph />
+        </Modal>
       </div>
     );
   }

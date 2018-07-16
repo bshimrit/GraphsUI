@@ -10,7 +10,7 @@ function convertGraphToProp() {
   for (var vertex in graph) {
     nodes.push({
       id: parseInt(vertex),
-      label: vertex,
+      label: graph[vertex].name,
       color: { background: "#ffffff" }
     });
     for (let i = 0; i < graph[vertex].relations.length; i++) {
